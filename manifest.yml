@@ -1,0 +1,11 @@
+applications:
+- name: nginx-perl
+  command: varify ./nginx.conf && cpan install FCGI && ./fastcgi-wrapper.pl && nginx -p $PWD -c ./nginx.conf
+  # command: varify ./nginx.conf && nginx -p $PWD -c ./nginx.conf
+  buildpack: https://github.com/cloudfoundry/nginx-buildpack.git
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  routes:
+  - route: nginx-perl.cfapps.io
+  stack: cflinuxfs2
